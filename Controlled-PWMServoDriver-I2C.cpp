@@ -1,3 +1,26 @@
+/*
+||Controlled-PWMServoDriver-I2C version=1.0
+||
+|| Credits: Library depends heavily on controlledServo library by Brett Hagman.
+|| 
+|| This library controlles individual servo's connected to the I2C PCA9685 board and uses
+|| the Adafruit_PWMServoDriver for the physical connection
+|| 
+|| The control internally is based on the pulselength, but the interface is in degrees.
+|| Major controls per servo:
+|| 1. Speed
+|| 2. Min en max position
+|| 3. Offset from middle position (trim)
+|| 4. Rotation direction (cw or ccw) for easy control in programm.
+|| 5. The library is expected to control multiple PCA9685 boards, but that is not tested.
+||
+|| @3
+||   The offset (trim) allows us to control servo's as if the middle is always 90 deg.
+|| @4
+||   In the enclosed CAD-head is the eyelash from left en right eye mirrored, but
+||   by specifying cw en ccw for the servo's we can control them equally.
+*/
+
 #include <Controlled-PWMServoDriver-I2C.h>
 
 float mapfloat(float x, float in_min, float in_max, float out_min, float out_max) {

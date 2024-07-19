@@ -1,4 +1,6 @@
 /*
+||Controlled-PWMServoDriver-I2C version=1.0
+||
 || Credits: Library depends heavily on controlledServo library by Brett Hagman.
 || 
 || This library controlles individual servo's connected to the I2C PCA9685 board and uses
@@ -18,6 +20,9 @@
 ||   In the enclosed CAD-head is the eyelash from left en right eye mirrored, but
 ||   by specifying cw en ccw for the servo's we can control them equally.
 */
+
+#ifndef Controlled_PWMServoDriver_I2C_h
+#define Controlled_PWMServoDriver_I2C_h
 
 #include <arduino.h>
 #include <Adafruit_PWMServoDriver.h>
@@ -86,3 +91,4 @@ class ControlledServos {
     bool _direction;
     uint32_t _lastUpdateTime;
 };
+#endif

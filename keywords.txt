@@ -1,0 +1,42 @@
+#######################################
+# Classes, datatypes (KEYWORD1)
+#######################################
+
+ControlledServos KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin            KEYWORD2
+initServo        KEYWORD2
+setAngle         KEYWORD2
+getAngle         KEYWORD2
+getTargetAngle   KEYWORD2
+setTrim          KEYWORD2
+getTrim          KEYWORD2
+setDir           KEYWORD2
+setMin           KEYWORD2
+setMax           KEYWORD2
+SetMid           KEYWORD2
+setMinMaxDirTrim KEYWORD2
+move             KEYWORD2
+moveTo           KEYWORD2
+moveToNow        KEYWORD2
+setRate          KEYWORD2
+getRate          KEYWORD2
+moving           KEYWORD2
+update           KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+# Servo pulse width's
+pulseMin         LITERAL1
+pulseMid         LITERAL1
+pulseMax         LITERAL1
+
+# Motor rotation direction
+cw               LITERAL1
+ccw              LITERAL1
