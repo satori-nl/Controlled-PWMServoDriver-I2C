@@ -5,14 +5,14 @@
 || Please download the head.stp James Brutonfrom github as basis. 
 || Replace the eye assemblies with my assembly and enjoy.
 || 
-|| For the control od the head with up-down eyes you need:
+|| For the control of the head with up-down eyes you need:
 || 1. The robot with 9 servo's
 || 2. Arduino Uno
 || 3. a dual joystick shield HU-M16 (meArm joystick shield)
 || 4. a PCA9685 board (I2C 16 servo-driver)
-|| PS1: On the PCA9685 are Vcc, Gnd and A4 and A5 available.
+|| PS1: On the HU-M16 (joystick shield) are Vcc, Gnd and A4 (SDA) and A5(SCL) available.
 ||
-|| How to use program:
+|| How to use programm:
 || Programm starts in mode 1. (Red led on joystick board lights full)
 || When in mode 1 you can change to mode 2 by pressing  the right joystick button.
 || In mode 2 the red led on joystick board is dimmed.
@@ -167,7 +167,7 @@ void blinkEye(ControlledServos &aServo){
     aServo.setRate(orgRate);
 }
 
-void verplaatsServo(ControlledServos &aServo, int aHoek) {
+void targetServoPos(ControlledServos &aServo, int aHoek) {
   aServo.moveTo(aHoek);
 }  
 
@@ -175,17 +175,17 @@ void setAll(uint8_t servoEyeLRLeAngle, uint8_t servoEyeLRRiAngle, uint8_t servoE
             uint8_t servoEyeHLRiAngle, uint8_t servoEyelashLeAngle, uint8_t servoEyelashRiAngle,
             uint8_t servoBaseUpLeAngle, uint8_t servoBaseUpRiAngle, uint8_t servoBaseAngle)
 {
-  verplaatsServo(servoEyeLRLe, servoEyeLRLeAngle);
-  verplaatsServo(servoEyeLRRi, servoEyeLRRiAngle);
-  verplaatsServo(servoEyeHLLe, servoEyeHLLeAngle);
-  verplaatsServo(servoEyeHLRi, servoEyeHLRiAngle);
+  targetServoPos(servoEyeLRLe, servoEyeLRLeAngle);
+  targetServoPos(servoEyeLRRi, servoEyeLRRiAngle);
+  targetServoPos(servoEyeHLLe, servoEyeHLLeAngle);
+  targetServoPos(servoEyeHLRi, servoEyeHLRiAngle);
 
-  verplaatsServo(servoEyelashLe, servoEyelashLeAngle);
-  verplaatsServo(servoEyelashRi, servoEyelashRiAngle);
+  targetServoPos(servoEyelashLe, servoEyelashLeAngle);
+  targetServoPos(servoEyelashRi, servoEyelashRiAngle);
 
-  verplaatsServo(servoBaseUpLe, servoBaseUpLeAngle);
-  verplaatsServo(servoBaseUpRi, servoBaseUpRiAngle);
-  verplaatsServo(servoBase, servoBaseAngle);
+  targetServoPos(servoBaseUpLe, servoBaseUpLeAngle);
+  targetServoPos(servoBaseUpRi, servoBaseUpRiAngle);
+  targetServoPos(servoBase, servoBaseAngle);
 }
 
 void setSpeed(uint16_t servoEyeLRLeSpeed, uint16_t servoEyeLRRiSpeed, uint16_t servoEyeHLLeSpeed,
@@ -205,7 +205,7 @@ void setSpeed(uint16_t servoEyeLRLeSpeed, uint16_t servoEyeLRRiSpeed, uint16_t s
   servoBase.setRate(servoBaseSpeed);
 }
 
-int VerwerkPositie(ControlledServos &aServo, uint16_t joystickPin) {
+int processJoystick(ControlledServos &aServo, uint16_t joystickPin) {
   int16_t joystickPos;
   int8_t servoPos = aServo.getAngle();
 
@@ -219,9 +219,9 @@ int VerwerkPositie(ControlledServos &aServo, uint16_t joystickPin) {
   }
 }
 
-int VerwerkPositie(ControlledServos &aServo1, ControlledServos &aServo2, uint16_t joystickPin) {
-  VerwerkPositie(aServo1, joystickPin);
-  VerwerkPositie(aServo2, joystickPin);
+int processJoystick(ControlledServos &aServo1, ControlledServos &aServo2, uint16_t joystickPin) {
+  processJoystick(aServo1, joystickPin);
+  processJoystick(aServo2, joystickPin);
 }
 
 void setup() {
@@ -287,14 +287,14 @@ void loop() {
     }
 
     if (eyeControl) {
-      VerwerkPositie(servoEyeLRLe, servoEyeLRRi, joystick1X_Pin);
-      VerwerkPositie(servoEyeHLLe, servoEyeHLRi, joystick1Y_Pin);
-      VerwerkPositie(servoEyelashLe, joystick2X_Pin);
-      VerwerkPositie(servoEyelashRi, joystick2Y_Pin);
+      processJoystick(servoEyeLRLe, servoEyeLRRi, joystick1X_Pin);
+      processJoystick(servoEyeHLLe, servoEyeHLRi, joystick1Y_Pin);
+      processJoystick(servoEyelashLe, joystick2X_Pin);
+      processJoystick(servoEyelashRi, joystick2Y_Pin);
     } else {
-      VerwerkPositie(servoBaseUpLe, joystick1Y_Pin);
-      VerwerkPositie(servoBaseUpRi, joystick2Y_Pin);
-      VerwerkPositie(servoBase, joystick1X_Pin);
+      processJoystick(servoBaseUpLe, joystick1Y_Pin);
+      processJoystick(servoBaseUpRi, joystick2Y_Pin);
+      processJoystick(servoBase, joystick1X_Pin);
     }
     moveAll(); 
 
