@@ -5,15 +5,16 @@
 || the Adafruit_PWMServoDriver for the physical connection
 || 
 || The control internally is based on the pulselength, but the interface is in degrees.
-|| Major controls:
-|| 1. Speed per servo
-|| 2. Offset from middle position in degrees (trim)
-|| 3. Rotation direction (cw or ccw) for easy control in programm.
-|| 4. The library is expected to control multiple PCA9685 boards, but that is not tested.
+|| Major controls per servo:
+|| 1. Speed
+|| 2. Min en max position
+|| 3. Offset from middle position (trim)
+|| 4. Rotation direction (cw or ccw) for easy control in programm.
+|| 5. The library is expected to control multiple PCA9685 boards, but that is not tested.
 ||
-|| @2
-||   The offset (trim) allows us to control servo's as if the middle is always 90 deg.
 || @3
+||   The offset (trim) allows us to control servo's as if the middle is always 90 deg.
+|| @4
 ||   In the enclosed CAD-head is the eyelash from left en right eye mirrored, but
 ||   by specifying cw en ccw for the servo's we can control them equally.
 */
