@@ -1,5 +1,6 @@
 # Controlled-PWMServoDriver-I2C
- Control PWM servos using PCA9685 board <\br>
+ Control PWM servos using PCA9685 board 
+ 
  Major controls:
  1. Speed
  2. Min en max position
